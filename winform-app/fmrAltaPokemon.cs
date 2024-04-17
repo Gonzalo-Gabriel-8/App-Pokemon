@@ -36,7 +36,11 @@ namespace winform_app
 
                 poke.Nombre= txtNombre.Text;
 
-                poke.Descripcion= txtDescripcion.Text;  
+                poke.Descripcion= txtDescripcion.Text;
+                
+                poke.Tipo = (Elemento)cboTipo.SelectedItem; //capturar la valor del desplegable
+
+                poke.Debilidad = (Elemento)cboDebilidad.SelectedItem; //capturar la valor del desplegable
 
                 negocio.Agregar(poke);
 
