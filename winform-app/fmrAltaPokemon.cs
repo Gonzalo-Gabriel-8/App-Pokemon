@@ -51,5 +51,21 @@ namespace winform_app
                 MessageBox.Show(ex.ToString());
             }
         }
+        /*Cargar combos desplegables*/
+        private void fmrAltaPokemon_Load(object sender, EventArgs e)
+        {
+            ElementoNegocio elementoNegocio = new ElementoNegocio();
+
+            try
+            {
+                cboTipo.DataSource = elementoNegocio.Listar();
+                cboDebilidad.DataSource=elementoNegocio.Listar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

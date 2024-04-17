@@ -36,6 +36,10 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.BtnAgregar = new System.Windows.Forms.Button();
             this.BtnCancelar = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cboTipo = new System.Windows.Forms.ComboBox();
+            this.cboDebilidad = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -106,11 +110,51 @@
             this.BtnCancelar.UseVisualStyleBackColor = true;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(43, 171);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Tipo:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(43, 210);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Debilidad";
+            // 
+            // cboTipo
+            // 
+            this.cboTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipo.FormattingEnabled = true;
+            this.cboTipo.Location = new System.Drawing.Point(136, 163);
+            this.cboTipo.Name = "cboTipo";
+            this.cboTipo.Size = new System.Drawing.Size(112, 21);
+            this.cboTipo.TabIndex = 10;
+            // 
+            // cboDebilidad
+            // 
+            this.cboDebilidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDebilidad.FormattingEnabled = true;
+            this.cboDebilidad.Location = new System.Drawing.Point(136, 202);
+            this.cboDebilidad.Name = "cboDebilidad";
+            this.cboDebilidad.Size = new System.Drawing.Size(112, 21);
+            this.cboDebilidad.TabIndex = 11;
+            // 
             // fmrAltaPokemon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(312, 342);
+            this.Controls.Add(this.cboDebilidad);
+            this.Controls.Add(this.cboTipo);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnAgregar);
             this.Controls.Add(this.txtDescripcion);
@@ -122,6 +166,7 @@
             this.Name = "fmrAltaPokemon";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta Pokemon";
+            this.Load += new System.EventHandler(this.fmrAltaPokemon_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,5 +182,9 @@
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Button BtnAgregar;
         private System.Windows.Forms.Button BtnCancelar;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cboTipo;
+        private System.Windows.Forms.ComboBox cboDebilidad;
     }
 }
