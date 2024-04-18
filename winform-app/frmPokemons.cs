@@ -23,10 +23,19 @@ namespace winform_app
         private void frmPokemons_Load(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio(); //crea una instancia de PokemonNegocio
-            listaPokemons = negocio.listar();
-            dgvPokemons.DataSource = listaPokemons;
-            dgvPokemons.Columns["UrlImagen"].Visible=false;
-            pictureBoxPokemon.Load(listaPokemons[0].UrlImagen);
+            try
+            {
+                listaPokemons = negocio.listar();
+                dgvPokemons.DataSource = listaPokemons;
+                dgvPokemons.Columns["UrlImagen"].Visible = false;
+                pictureBoxPokemon.Load(listaPokemons[0].UrlImagen);
+
+            }
+            catch (Exception ex)
+            {   /*larnzar un mensaje de advertencia pero no dejar que el programa caiga*/
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void dgvPokemons_SelectionChanged(object sender, EventArgs e)

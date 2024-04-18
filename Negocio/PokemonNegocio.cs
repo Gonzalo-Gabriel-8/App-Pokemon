@@ -34,7 +34,11 @@ namespace Negocio
                     aux.Numero = lector.GetInt32(0);
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
+
+                    //validar datos null
+                    if (!lector.IsDBNull (lector.GetOrdinal("UrlImagen"))) //si no es nulo, lo leo
                     aux.UrlImagen=(string) lector["UrlImagen"];
+
                     aux.Tipo = new Elemento();
                     aux.Tipo.Descripcion= (string)lector["Tipo"];
                     aux.Debilidad= new Elemento();
@@ -47,7 +51,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                  throw ex;
             }
 
         }
