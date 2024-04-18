@@ -37,6 +37,8 @@ namespace winform_app
                 poke.Nombre= txtNombre.Text;
 
                 poke.Descripcion= txtDescripcion.Text;
+
+                poke.UrlImagen= txtUrlImagen.Text;
                 
                 poke.Tipo = (Elemento)cboTipo.SelectedItem; //capturar la valor del desplegable
 
@@ -69,6 +71,23 @@ namespace winform_app
             {
 
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txtUrlImagen_Leave(object sender, EventArgs e)
+        {
+            CargaImagen(txtUrlImagen.Text);
+        }
+        private void CargaImagen(string imagen)
+        {
+            try
+            {
+                pictureBoxPokemon.Load(imagen);
+            }
+            catch (Exception ex)
+            {
+
+                pictureBoxPokemon.Load("https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=");
             }
         }
     }
