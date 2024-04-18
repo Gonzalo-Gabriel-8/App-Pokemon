@@ -33,6 +33,7 @@ namespace winform_app
             this.pictureBoxPokemon = new System.Windows.Forms.PictureBox();
             this.BtnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.btnEliminarFisico = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPokemon)).BeginInit();
             this.SuspendLayout();
@@ -70,7 +71,7 @@ namespace winform_app
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(160, 307);
+            this.btnModificar.Location = new System.Drawing.Point(140, 307);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(93, 23);
             this.btnModificar.TabIndex = 3;
@@ -78,11 +79,22 @@ namespace winform_app
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
+            // btnEliminarFisico
+            // 
+            this.btnEliminarFisico.Location = new System.Drawing.Point(250, 307);
+            this.btnEliminarFisico.Name = "btnEliminarFisico";
+            this.btnEliminarFisico.Size = new System.Drawing.Size(154, 23);
+            this.btnEliminarFisico.TabIndex = 4;
+            this.btnEliminarFisico.Text = "Eliminar Fisico";
+            this.btnEliminarFisico.UseVisualStyleBackColor = true;
+            this.btnEliminarFisico.Click += new System.EventHandler(this.btnEliminarFisico_Click);
+            // 
             // frmPokemons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1052, 342);
+            this.Controls.Add(this.btnEliminarFisico);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.BtnAgregar);
             this.Controls.Add(this.pictureBoxPokemon);
@@ -103,6 +115,7 @@ namespace winform_app
         private System.Windows.Forms.PictureBox pictureBoxPokemon;
         private System.Windows.Forms.Button BtnAgregar;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnEliminarFisico;
     }
 }
 

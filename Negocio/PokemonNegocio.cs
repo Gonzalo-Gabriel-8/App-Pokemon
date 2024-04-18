@@ -111,7 +111,25 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
+        public void Eliminar(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.SetearConsulta("delete from POKEMONS where id= @id");
+                datos.SetearParametros("@id", id);
+                datos.EjecuctarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
+
+    
     
 
 }
