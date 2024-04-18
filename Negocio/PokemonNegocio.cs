@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dominio;
+using System.Xml.Serialization.Configuration;
 
 
 namespace Negocio 
@@ -22,7 +23,7 @@ namespace Negocio
             {
                 conexion.ConnectionString = "server=DESKTOP-A95RF6B; database=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion tipo, D.Descripcion Debilidad from POKEMONS P, ELEMENTOS E, ELEMENTOS D where E.Id = P.IdTipo and D.Id = P.IdDebilidad\r\n";
+                comando.CommandText = "select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id from POKEMONS P, ELEMENTOS E, ELEMENTOS D where E.Id = P.IdTipo and D.Id = P.IdDebilidad\r\n";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -31,6 +32,7 @@ namespace Negocio
                 while (lector.Read())
                 {
                     Pokemon aux = new Pokemon();
+                    aux.Id = (int)lector["Id"];
                     aux.Numero = lector.GetInt32(0);
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
@@ -40,8 +42,11 @@ namespace Negocio
                     aux.UrlImagen=(string) lector["UrlImagen"];
 
                     aux.Tipo = new Elemento();
+                    aux.Tipo.Id =(int)lector["IdTipo"];
+                   
                     aux.Tipo.Descripcion= (string)lector["Tipo"];
                     aux.Debilidad= new Elemento();
+                    aux.Debilidad.Id = (int)lector["IdDebilidad"];
                     aux.Debilidad.Descripcion = (string)lector["Debilidad"];
                     lista.Add(aux);
                 }
@@ -79,9 +84,32 @@ namespace Negocio
             }
         }
 
-        public void Modificar(Pokemon modificar)
+        public void Modificar(Pokemon poke)
         {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("update POKEMONS set Numero=@numero, Nombre=@nombre, Descripcion=@descripcion, UrlImagen=@img, IdTipo=@idTipo,IdDebilidad=@idDebilidad where id=@id");
+                datos.SetearParametros("numero", poke.Numero);
+                datos.SetearParametros("@nombre", poke.Nombre);
+                datos.SetearParametros("@descripcion", poke.Descripcion);
+                datos.SetearParametros("@img", poke.UrlImagen);
+                datos.SetearParametros("@idTipo", poke.Tipo.Id);
+                datos.SetearParametros("@idDebilidad", poke.Debilidad.Id);
+                datos.SetearParametros("@id", poke.Id);
 
+                datos.EjecuctarAccion();
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
         }
     }
     

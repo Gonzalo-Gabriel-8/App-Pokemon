@@ -100,7 +100,7 @@
             this.BtnAgregar.Name = "BtnAgregar";
             this.BtnAgregar.Size = new System.Drawing.Size(91, 23);
             this.BtnAgregar.TabIndex = 6;
-            this.BtnAgregar.Text = "Agregar";
+            this.BtnAgregar.Text = "Aceptar";
             this.BtnAgregar.UseVisualStyleBackColor = true;
             this.BtnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
