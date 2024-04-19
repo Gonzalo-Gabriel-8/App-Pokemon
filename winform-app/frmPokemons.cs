@@ -27,8 +27,12 @@ namespace winform_app
 
         private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
         {
-            Pokemon seleccionado= (Pokemon) dgvPokemons.CurrentRow.DataBoundItem;
-            CargaImagen(seleccionado.UrlImagen);
+            if(dgvPokemons.CurrentRow != null)
+            {
+                Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+                CargaImagen(seleccionado.UrlImagen);
+            }
+           
         }
 
         private void refrescarFormulario()
@@ -38,8 +42,7 @@ namespace winform_app
             {
                 listaPokemons = negocio.listar();
                 dgvPokemons.DataSource = listaPokemons;
-                dgvPokemons.Columns["UrlImagen"].Visible = false;
-                dgvPokemons.Columns["Id"].Visible = false;
+                OcultarColumnas();
                 pictureBoxPokemon.Load(listaPokemons[0].UrlImagen);
 
             }
@@ -49,6 +52,12 @@ namespace winform_app
                 MessageBox.Show(ex.ToString());
             }
         } 
+
+        private void OcultarColumnas()
+        {
+            dgvPokemons.Columns["UrlImagen"].Visible = false;
+            dgvPokemons.Columns["Id"].Visible = false;
+        }
 
         private void CargaImagen(string imagen)
         {
@@ -125,6 +134,32 @@ namespace winform_app
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            //Aplicar un filto sobre la listaPokemon
+
+            List<Pokemon> ListaFiltrada;
+
+
+            string filtro=txtFiltro.Text;
+
+            if(filtro != "") //resetear la lista
+            {
+                ListaFiltrada = listaPokemons.FindAll(x => x.Nombre.ToLower().Contains(filtro.ToLower())); //una suerte de forEach para evaluar si el nombre del objeto es igual al filtro que le di
+            }
+            else
+            {
+                ListaFiltrada = listaPokemons;
+            }
+                      
+
+            dgvPokemons.DataSource = null; //una limpieza
+
+            dgvPokemons.DataSource = ListaFiltrada;
+
+            OcultarColumnas();
         }
     }
 }
