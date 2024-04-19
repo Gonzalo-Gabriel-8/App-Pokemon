@@ -138,22 +138,33 @@ namespace winform_app
 
         private void btnFiltro_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
             //Aplicar un filto sobre la listaPokemon
 
             List<Pokemon> ListaFiltrada;
 
 
-            string filtro=txtFiltro.Text;
+            string filtro = txtFiltro.Text;
 
-            if(filtro != "") //resetear la lista
+            if (filtro.Length >= 3) //resetear la lista
             {
-                ListaFiltrada = listaPokemons.FindAll(x => x.Nombre.ToLower().Contains(filtro.ToLower())); //una suerte de forEach para evaluar si el nombre del objeto es igual al filtro que le di
+                //una suerte de forEach para evaluar si el nombre del objeto es igual al filtro que le di
+                ListaFiltrada = listaPokemons.FindAll(x => x.Nombre.ToLower().Contains(filtro.ToLower()) || x.Tipo.Descripcion.ToUpper().Contains(filtro.ToUpper()));
             }
             else
             {
                 ListaFiltrada = listaPokemons;
             }
-                      
+
 
             dgvPokemons.DataSource = null; //una limpieza
 
