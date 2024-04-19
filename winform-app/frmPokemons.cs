@@ -76,7 +76,7 @@ namespace winform_app
         private void btnModificar_Click(object sender, EventArgs e)
         {
             Pokemon seleccionado;
-            seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+            seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem; //le paso por parametros el objeto pokemon que voy a modificar
 
             fmrAltaPokemon modificar = new fmrAltaPokemon(seleccionado); //llamo al otro constructor con el parametro
 
@@ -87,17 +87,38 @@ namespace winform_app
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
-            PokemonNegocio negocio= new PokemonNegocio();
+            eliminar();
+        }
+
+        private void btnLogico_Click(object sender, EventArgs e)
+        {
+            eliminar(true);
+        }
+
+        private void eliminar(bool logico=false)
+        {
+            PokemonNegocio negocio = new PokemonNegocio();
             Pokemon seleccionado;
             try
             {
-                DialogResult respuesta= MessageBox.Show("¿Deseas Eliminarlo?","Eeliminando",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
-                if(respuesta== DialogResult.Yes)
+                DialogResult respuesta = MessageBox.Show("¿Deseas Eliminarlo?", "Eeliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (respuesta == DialogResult.Yes)
                 {
                     seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
-                    negocio.Eliminar(seleccionado.Id);
+
+                    if (logico)
+                    {
+                        negocio.EliminarLogico(seleccionado.Id);
+                    }
+                    else
+                    {
+                        negocio.Eliminar(seleccionado.Id);
+                    }
+                        
+                    
                     refrescarFormulario();
-                }                
+                }
             }
             catch (Exception ex)
             {

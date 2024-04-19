@@ -14,16 +14,16 @@ namespace winform_app
 {
     public partial class fmrAltaPokemon : Form
     {
-        private Pokemon pokemon=null; 
+        private Pokemon pokemon=null; //atrubuto inicializado en null
         public fmrAltaPokemon()
         {
             InitializeComponent();
         }
 
         public fmrAltaPokemon( Pokemon pokemon)
-        {
+        { //contructor modificado para pasarle por parametro un pokemon
             InitializeComponent();
-            this.pokemon = pokemon;
+            this.pokemon = pokemon; //este atrubuto privado le asigno el objeto
             Text = "Modificar Pokemon";
         }
 
@@ -82,21 +82,22 @@ namespace winform_app
 
             try
             {
+                //clave valor del desplegable. EL el valor con el que me voy a quedar y lo que voy a mostrar
                 cboTipo.DataSource = elementoNegocio.Listar();
                 cboTipo.ValueMember = "Id"; //valor clave
                 cboTipo.DisplayMember = "Descripcion";//lo qque vas a mostrar
 
                 cboDebilidad.DataSource=elementoNegocio.Listar();
                 cboDebilidad.ValueMember="Id";
-                cboDebilidad.DisplayMember = "Descrpcion";
+                cboDebilidad.DisplayMember = "Descripcion";
 
-                if(pokemon!=null)
+                if(pokemon!=null) //Si el pokemon esta distinto de null es un modificar
                 {
                     txtNumero.Text=pokemon.Numero.ToString();
                     txtNombre.Text=pokemon.Nombre;
                     txtDescripcion.Text=pokemon.Descripcion;                    
                     txtUrlImagen.Text = pokemon.UrlImagen;
-                    CargaImagen(pokemon.UrlImagen);
+                    CargaImagen(pokemon.UrlImagen); //precargar la imagen
                     cboTipo.SelectedValue = pokemon.Tipo.Id;
                     cboDebilidad.SelectedValue=pokemon.Debilidad.Id;
                 }

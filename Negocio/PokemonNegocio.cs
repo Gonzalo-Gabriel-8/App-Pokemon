@@ -23,7 +23,7 @@ namespace Negocio
             {
                 conexion.ConnectionString = "server=DESKTOP-A95RF6B; database=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id from POKEMONS P, ELEMENTOS E, ELEMENTOS D where E.Id = P.IdTipo and D.Id = P.IdDebilidad\r\n";
+                comando.CommandText = "select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id from POKEMONS P, ELEMENTOS E, ELEMENTOS D where E.Id = P.IdTipo and D.Id = P.IdDebilidad And P.Activo= 1\r\n";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -90,7 +90,7 @@ namespace Negocio
             try
             {
                 datos.SetearConsulta("update POKEMONS set Numero=@numero, Nombre=@nombre, Descripcion=@descripcion, UrlImagen=@img, IdTipo=@idTipo,IdDebilidad=@idDebilidad where id=@id");
-                datos.SetearParametros("numero", poke.Numero);
+                datos.SetearParametros("@numero", poke.Numero);
                 datos.SetearParametros("@nombre", poke.Nombre);
                 datos.SetearParametros("@descripcion", poke.Descripcion);
                 datos.SetearParametros("@img", poke.UrlImagen);
@@ -118,6 +118,23 @@ namespace Negocio
             {
                 AccesoDatos datos = new AccesoDatos();
                 datos.SetearConsulta("delete from POKEMONS where id= @id");
+                datos.SetearParametros("@id", id);
+                datos.EjecuctarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex; 
+            }
+        }
+
+        public void EliminarLogico(int id)
+        {
+            
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.SetearConsulta("update POKEMONS set Activo = 0 where id = @id");
                 datos.SetearParametros("@id", id);
                 datos.EjecuctarAccion();
             }
